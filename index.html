@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Jobler - A Evolução do Recrutamento</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Preload Critical Images -->
+    <link rel="preload" as="image" href="assets/images/characters/1.webp">
+    <link rel="preload" as="image" href="assets/images/characters/2.webp">
+    <link rel="preload" as="image" href="assets/images/characters/3.webp">
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        neutral: {
+                            950: '#050505',
+                            900: '#0a0a0c',
+                            800: '#1a1a1a',
+                        },
+                        blue: {
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-50 dark:bg-neutral-950 text-neutral-900 dark:text-white antialiased selection:bg-blue-500/30">
+
+    <!-- Fixed Video Background (Only active in Hero) -->
+    <video id="video-bg" playsinline webkit-playsinline autoplay loop muted preload="auto">
+        <source src="assets/videos/boomerang.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay" id="hero-overlay"></div>
+
+    <!-- 1ª SEÇÃO: HEADER -->
+    <nav class="fixed top-0 w-full z-50 bg-[#050505]/40 backdrop-blur-md border-b border-white/5 transition-all">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="#" class="flex items-center gap-2 group">
+                    <img src="assets/images/logo/LOGO3Dsemfundo.webp" alt="Jobler Logo" class="h-10 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity">
+                    <span class="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">Jobler</span>
+                </a>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="flex items-center gap-4">
+                <a href="#" onclick="openSobreModal(); return false;" class="inline-flex gap-2 border-gradient hover:text-neutral-900 dark:text-white transition-all hover:-translate-y-0.5 text-sm font-medium text-neutral-900 dark:text-white/80 bg-neutral-100 dark:bg-white/5 rounded-full px-6 py-2.5 backdrop-blur-xl items-center">
+                    Sobre
+                </a>
+                <a href="https://jobler.inhire.app/vagas" target="_blank" class="inline-flex gap-2 border-gradient hover:text-neutral-900 dark:text-white transition-all hover:-translate-y-0.5 text-sm font-medium text-neutral-900 dark:text-white/80 bg-neutral-100 dark:bg-white/5 rounded-full px-6 py-2.5 backdrop-blur-xl items-center shadow-[0_0_15px_rgba(59,130,246,0.15)] relative z-50">
+                    Vagas
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="relative z-10 bg-transparent">
+        
+        <!-- 1ª SEÇÃO: HERO -->
+        <section id="hero" class="relative min-h-screen flex items-center pt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto px-6 items-center w-full hero-content">
+                
+                <!-- Left Content -->
+                <div class="lg:col-span-8 flex flex-col items-start">
+                    
+                    <h1 class="text-5xl lg:text-[72px] leading-[1.05] text-white font-bold tracking-tight mb-6 animate-entry delay-100">
+                        Contratar quem faz a diferença<br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">é o nosso Job</span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-neutral-400 max-w-2xl mb-10 leading-relaxed animate-entry delay-200">
+                        Conectamos sua empresa aos melhores profissionais do mercado, por meio de uma atuação próxima, consultiva e com a autoridade de quem domina o seu setor.
+                    </p>
+                </div>
+
+                <!-- Right space reserved for the background video element to shine through without overlay cards -->
+                <div class="hidden lg:flex lg:col-span-4 justify-end"></div>
+
+            </div>
+
+            <!-- Scroll Indicator Button -->
+            <div class="absolute bottom-10 w-full flex justify-center z-30 pointer-events-none">
+                <div class="animate-entry delay-300 pointer-events-auto">
+                    <button onclick="document.getElementById('solucao-intro').scrollIntoView({behavior: 'smooth'})" class="group inline-flex overflow-hidden transition-all duration-300 hover:scale-[1.02] focus:outline-none text-sm font-medium text-white h-[54px] rounded-full px-8 relative items-center justify-center cursor-pointer">
+                        <div class="absolute inset-0 -z-20 rounded-full overflow-hidden p-[1px]">
+                            <div class="absolute inset-[-100%] bg-[conic-gradient(from_0deg,transparent_0_300deg,#3b82f6_360deg)]" style="animation: beam-spin 3s linear infinite;"></div>
+                            <div class="absolute inset-[1px] rounded-full bg-neutral-950"></div>
+                        </div>
+                        <div class="overflow-hidden bg-neutral-900 rounded-full absolute top-[2px] right-[2px] bottom-[2px] left-[2px]">
+                            <div class="bg-gradient-to-b from-blue-900/20 to-transparent absolute inset-0"></div>
+                            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-blue-500/20 blur-2xl rounded-full pointer-events-none transition-colors duration-500 group-hover:bg-blue-500/40"></div>
+                        </div>
+                        <span class="transition-colors group-hover:text-white uppercase font-semibold text-white/90 tracking-tight z-10 relative">Saiba Mais</span>
+                        <i data-lucide="arrow-down" class="relative z-10 w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-y-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dark Solid Background starts here to hide video behind subsequent sections -->
+        <div class="bg-neutral-950 relative z-20 shadow-[0_-20px_50px_rgba(5,5,5,1)]">
+
+            <!-- 2ª SEÇÃO: A DOR & SOLUÇÃO (Text Reveal Intro) -->
+            <section id="solucao-intro" class="bg-neutral-950 py-24 md:py-32 flex items-center justify-center px-6 relative overflow-hidden">
+                <div class="max-w-2xl mx-auto text-center relative w-full flex items-center justify-center">
+                    <div id="text-part-1" class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.3] text-white">
+                        O recrutamento tradicional é lento, ineficiente e custa mais do que apenas dinheiro, ele custa o crescimento da sua empresa. Chega de contratar no escuro.
+                    </div>
+                    <div id="text-part-2" class="absolute text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-blue-500 opacity-0 translate-y-8 pointer-events-none w-full whitespace-nowrap">
+                        Conheça o nosso processo.
+                    </div>
+                </div>
+            </section>
+
+
+            <!-- 3ª SEÇÃO: THE ENGINE (How it Works Style) -->
+            <section id="engine" class="py-32 px-6 bg-[#050505] relative overflow-hidden">
+                
+                <div class="mx-auto max-w-7xl relative">
+                    <div class="rounded-3xl border border-white/[0.08] p-6 sm:p-8 relative backdrop-blur-xl card-grid-bg shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                        
+                        <!-- Header -->
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-center st-fade-up">
+                            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white tracking-tighter">Sprint Hire.</h2>
+                            <span aria-hidden="true" aria-orientation="vertical" class="hidden sm:block w-px bg-white/20 h-10" role="separator"></span>
+                            <p class="text-base text-neutral-600 dark:text-neutral-400 tracking-tight">3 etapas para a contratação perfeita em até 21 dias</p>
+                        </div>
+                        <div class="h-px bg-neutral-200 dark:bg-white/10 mt-6"></div>
+                        
+                        <!-- Cards -->
+                        <div class="group/board grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8 relative items-stretch">
+                            
+                            <!-- STEP 1 -->
+                            <div class="group group/card border border-white/5 rounded-[28px] p-6 sm:p-8 relative h-full flex flex-col bg-gray-50 dark:bg-neutral-950/50 hover:bg-neutral-100 dark:bg-neutral-900 transition-all duration-500 st-fade-up group-hover/board:opacity-40 hover:!opacity-100 hover:scale-[1.05] hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)] hover:bg-blue-900/20 hover:z-20 cursor-default">
+                                <span class="absolute -top-4 left-6 inline-flex items-center px-5 py-2 rounded-full border border-blue-500 bg-blue-600 text-sm font-bold text-neutral-900 dark:text-white font-mono tracking-wider shadow-[0_0_20px_rgba(37,99,235,0.6)] group-hover:bg-blue-500 group-hover:border-blue-400 group-hover:shadow-[0_0_35px_rgba(59,130,246,0.9)] transition-all duration-300 z-10">D+0</span>
+                                
+                                <div class="relative h-48 sm:h-56 rounded-2xl bg-neutral-100 dark:bg-white/5 border border-white/5 overflow-hidden group-hover/card:border-blue-500/20 transition-all p-6 flex flex-col justify-center items-center group-hover/card:scale-[1.02] duration-500">
+                                    
+                                    <!-- Search Bar Simulation -->
+                                    <div class="h-14 bg-neutral-100 dark:bg-neutral-900 border border-white/10 flex items-center rounded-full group-hover/card:rounded-xl transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] relative group-hover/card:shadow-[0_0_30px_rgba(59,130,246,0.2)] w-14 group-hover/card:w-full group-hover/card:max-w-[260px]">
+                                        <!-- Icon -->
+                                        <div class="absolute left-0 top-0 bottom-0 w-14 flex items-center justify-center">
+                                            <i data-lucide="search" class="w-6 h-6 text-neutral-500 group-hover/card:text-blue-400 transition-colors"></i>
+                                        </div>
+                                        <!-- Text -->
+                                        <div class="pl-12 pr-4 overflow-hidden">
+                                            <span class="text-xs sm:text-sm font-medium text-neutral-700 dark:text-neutral-300 whitespace-nowrap opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 delay-300 block">Buscando Tech Lead...</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Tags Area -->
+                                    <div class="flex flex-wrap justify-center gap-2 mt-4 absolute bottom-8 left-0 right-0 px-4">
+                                        <span class="px-2.5 py-1 bg-blue-500/10 border border-blue-500/20 rounded-md text-[10px] sm:text-xs text-blue-400 opacity-0 translate-y-4 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-300 delay-[400ms]">React</span>
+                                        <span class="px-2.5 py-1 bg-blue-500/10 border border-blue-500/20 rounded-md text-[10px] sm:text-xs text-blue-400 opacity-0 translate-y-4 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-300 delay-[500ms]">System Design</span>
+                                        <span class="px-2.5 py-1 bg-blue-500/10 border border-blue-500/20 rounded-md text-[10px] sm:text-xs text-blue-400 opacity-0 translate-y-4 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-300 delay-[600ms]">Liderança</span>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <h3 class="mt-8 text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white tracking-tight group-hover:text-blue-400 transition-colors">Deep Discovery</h3>
+                                <p class="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed group-hover:text-neutral-700 dark:text-neutral-300 transition-colors">Entendimento do seu negócio e cultura. Mapeamento de hard e softskills da vaga e apresentação de uma busca prévia para validação.</p>
+                            </div>
+
+                            <!-- STEP 2 -->
+                            <div class="group group/card border border-white/5 rounded-[28px] p-6 sm:p-8 relative h-full flex flex-col bg-gray-50 dark:bg-neutral-950/50 hover:bg-neutral-100 dark:bg-neutral-900 transition-all duration-500 st-fade-up delay-100 group-hover/board:opacity-40 hover:!opacity-100 hover:scale-[1.05] hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)] hover:bg-blue-900/20 hover:z-20 cursor-default">
+                                <span class="absolute -top-4 left-6 inline-flex items-center px-5 py-2 rounded-full border border-blue-500 bg-blue-600 text-sm font-bold text-neutral-900 dark:text-white font-mono tracking-wider shadow-[0_0_20px_rgba(37,99,235,0.6)] group-hover:bg-blue-500 group-hover:border-blue-400 group-hover:shadow-[0_0_35px_rgba(59,130,246,0.9)] transition-all duration-300 z-10">D+4</span>
+                                
+                                <div class="relative h-48 sm:h-56 rounded-2xl bg-neutral-100 dark:bg-white/5 border border-white/5 group-hover/card:border-blue-500/20 transition-all p-6 flex flex-col justify-center items-center group-hover/card:scale-[1.02] duration-500">
+                                    
+                                    <div class="w-[220px] h-32 relative">
+                                        <!-- Columns -->
+                                        <div class="absolute inset-0 grid grid-cols-3 gap-3.5">
+                                            <div class="border-2 border-dashed border-white/5 rounded-xl h-full relative"></div>
+                                            <div class="border-2 border-dashed border-white/5 rounded-xl h-full relative"></div>
+                                            <div class="border-2 border-dashed border-blue-500/10 rounded-xl h-full relative group-hover/card:border-blue-500/40 group-hover/card:bg-blue-500/5 transition-all duration-500"></div>
+                                        </div>
+
+                                        <!-- Moving Cards -->
+                                        <div class="absolute top-1 left-[5px] w-[54px] h-[56px] bg-[#111] border border-white/5 rounded-lg p-1.5 shadow-lg group-hover/card:translate-x-[73px] transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] z-10 flex flex-col items-center">
+                                            <div class="w-7 h-7 rounded-full overflow-hidden mb-1.5 border border-white/10">
+                                                <img src="assets/images/characters/1.webp" class="w-full h-full object-cover grayscale opacity-70" alt="Candidato">
+                                            </div>
+                                            <div class="w-8 h-1 bg-neutral-700 rounded-full"></div>
+                                        </div>
+
+                                        <div class="group/candidate absolute top-[64px] left-[78px] w-[54px] h-[56px] bg-[#111] border border-white/5 rounded-lg p-1.5 shadow-lg group-hover/card:translate-x-[73px] group-hover/card:border-blue-500/60 group-hover/card:bg-blue-900/30 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-700 delay-150 ease-[cubic-bezier(0.34,1.56,0.64,1)] z-30 flex flex-col items-center cursor-pointer">
+                                            <div class="w-7 h-7 rounded-full overflow-hidden mb-1.5 border border-white/10 group-hover/card:border-blue-400 transition-colors">
+                                                <img src="assets/images/characters/2.webp" class="w-full h-full object-cover grayscale opacity-80 group-hover/card:opacity-100 transition-opacity duration-700" alt="Candidato Destaque">
+                                            </div>
+                                            <div class="w-8 h-1 bg-neutral-700 rounded-full group-hover/card:bg-blue-400 transition-colors"></div>
+                                            
+                                            <div class="absolute bottom-[110%] left-1/2 -translate-x-1/2 w-[220px] bg-[#0a0a0c] border border-blue-500/30 rounded-xl p-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(59,130,246,0.2)] opacity-0 invisible group-hover/candidate:opacity-100 group-hover/candidate:visible transition-all duration-300 translate-y-2 group-hover/candidate:translate-y-0 pointer-events-none z-50">
+                                                <img src="assets/images/references/Parecer Jobler.png" class="w-full h-auto rounded-lg border border-white/5" alt="Parecer Jobler">
+                                                <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-[6px] border-transparent border-t-blue-500/30"></div>
+                                                <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-[2px] border-[6px] border-transparent border-t-[#0a0a0c]"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="absolute top-[64px] left-[5px] w-[54px] h-[56px] bg-[#111] border border-white/5 rounded-lg p-1.5 shadow-lg opacity-0 -translate-y-4 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-500 delay-300 z-10 flex flex-col items-center">
+                                            <div class="w-7 h-7 rounded-full overflow-hidden mb-1.5 border border-white/10">
+                                                <img src="assets/images/characters/3.webp" class="w-full h-full object-cover grayscale opacity-70" alt="Candidato">
+                                            </div>
+                                            <div class="w-8 h-1 bg-neutral-700 rounded-full"></div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <h3 class="mt-8 text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white tracking-tight group-hover:text-blue-400 transition-colors">Talent Mapping</h3>
+                                <p class="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed group-hover:text-neutral-700 dark:text-neutral-300 transition-colors">Mapeamos quem está preparado para o seu desafio. Após entrevistas apresentamos os top-performers.</p>
+                            </div>
+
+                            <!-- STEP 3 -->
+                            <div class="group group/card border border-white/5 rounded-[28px] p-6 sm:p-8 relative h-full flex flex-col bg-gray-50 dark:bg-neutral-950/50 hover:bg-neutral-100 dark:bg-neutral-900 transition-all duration-500 st-fade-up delay-200 group-hover/board:opacity-40 hover:!opacity-100 hover:scale-[1.05] hover:-translate-y-2 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)] hover:bg-blue-900/20 hover:z-20 cursor-default">
+                                <span class="absolute -top-4 left-6 inline-flex items-center px-5 py-2 rounded-full border border-blue-500 bg-blue-600 text-sm font-bold text-neutral-900 dark:text-white font-mono tracking-wider shadow-[0_0_20px_rgba(37,99,235,0.6)] group-hover:bg-blue-500 group-hover:border-blue-400 group-hover:shadow-[0_0_35px_rgba(59,130,246,0.9)] transition-all duration-300 z-10">D+21</span>
+                                
+                                <div class="relative h-48 sm:h-56 rounded-2xl bg-neutral-100 dark:bg-white/5 border border-white/5 group-hover/card:border-blue-500/20 transition-all p-6 flex flex-col justify-center items-center group-hover/card:scale-[1.02] duration-500">
+                                    
+                                    <!-- Match Score Circle -->
+                                    <div class="relative w-24 h-24 mb-3 mt-2">
+                                        <svg class="w-full h-full transform -rotate-90 drop-shadow-[0_0_15px_rgba(59,130,246,0)] group-hover/card:drop-shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all duration-700" viewBox="0 0 100 100">
+                                            <!-- Track -->
+                                            <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="8" fill="none" class="text-neutral-900 dark:text-white/10" />
+                                            <!-- Fill (Circumference is 2 * pi * 40 = ~251.2) -->
+                                            <circle cx="50" cy="50" r="40" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round" class="text-blue-500 [stroke-dasharray:251.2] [stroke-dashoffset:251.2] group-hover/card:[stroke-dashoffset:5] transition-all duration-[1.5s] ease-[cubic-bezier(0.34,1.56,0.64,1)] delay-100" />
+                                        </svg>
+                                        <!-- Score Text -->
+                                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                            <i data-lucide="user-check" class="w-8 h-8 text-neutral-500 group-hover/card:opacity-0 transition-opacity duration-300 absolute"></i>
+                                            <span class="text-xl font-bold text-neutral-900 dark:text-white opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 delay-[600ms] absolute">98%</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Mini Button -->
+                                    <div class="h-8 relative group/btn">
+                                        <div class="px-3 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-medium opacity-0 translate-y-2 group-hover/card:opacity-100 group-hover/card:translate-y-0 transition-all duration-500 delay-[800ms] flex items-center gap-1.5 cursor-pointer hover:bg-blue-500/20">
+                                            <i data-lucide="file-text" class="w-3 h-3"></i>
+                                            Ver relatório
+                                        </div>
+                                        <div class="absolute bottom-[130%] left-1/2 -translate-x-1/2 w-[220px] bg-[#0a0a0c] border border-blue-500/30 rounded-xl p-1.5 shadow-[0_20px_40px_rgba(0,0,0,0.8),0_0_20px_rgba(59,130,246,0.2)] opacity-0 invisible group-hover/btn:opacity-100 group-hover/btn:visible transition-all duration-300 translate-y-2 group-hover/btn:translate-y-0 pointer-events-none z-50">
+                                            <img src="assets/images/references/PDA.png" class="w-full h-auto rounded-lg border border-white/5" alt="Relatório PDA">
+                                            <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-[1px] border-[6px] border-transparent border-t-blue-500/30"></div>
+                                            <div class="absolute top-full left-1/2 -translate-x-1/2 -mt-[2px] border-[6px] border-transparent border-t-[#0a0a0c]"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                                <h3 class="mt-8 text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white tracking-tight group-hover:text-blue-400 transition-colors">Placement</h3>
+                                <p class="mt-3 text-neutral-600 dark:text-neutral-400 leading-relaxed group-hover:text-neutral-700 dark:text-neutral-300 transition-colors">Após assessment comportamental e checagem de referências, avançamos para a proposta e acompanhamento até o início do profissional</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4ª SEÇÃO: MÉTRICAS E DIFERENCIAIS -->
+            <section id="metricas" class="py-32 px-6 relative bg-white dark:bg-[#0a0a0c]">
+                <div class="max-w-7xl mx-auto">
+                    
+                    <!-- Slider Container -->
+                    <div id="metrics-slider-container" class="relative w-full rounded-3xl border border-white/10 overflow-hidden mb-24 h-[450px] md:h-[350px] select-none shadow-[0_0_50px_rgba(0,0,0,0.5)] bg-[#050505]">
+                        
+                        <!-- Base Layer (Com a Jobler - Blue) -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 to-transparent flex flex-col justify-center">
+                            <!-- Header -->
+                            <div class="absolute top-6 right-8 flex items-center gap-2">
+                                <span class="text-sm md:text-lg font-bold text-blue-400 uppercase tracking-wider">Com a Jobler</span>
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-blue-500"></i>
+                            </div>
+                            
+                            <!-- Metrics -->
+                            <div class="flex flex-col md:flex-row justify-around w-full px-6 gap-8 md:gap-0 mt-8 md:mt-0">
+                                <div class="text-center w-full">
+                                    <p class="text-xs font-semibold text-blue-200/50 uppercase tracking-widest mb-2">SLA de Apresentação</p>
+                                    <div class="flex items-baseline justify-center gap-1">
+                                        <span class="text-5xl md:text-6xl font-bold text-white tracking-tighter counter" data-target="4">0</span>
+                                        <span class="text-2xl text-blue-400 font-medium">dias</span>
+                                    </div>
+                                    <p class="text-xs text-blue-200/60 mt-2 mx-auto">Tempo médio de envio</p>
+                                </div>
+                                <div class="text-center w-full">
+                                    <p class="text-xs font-semibold text-blue-200/50 uppercase tracking-widest mb-2">Taxa de Retenção</p>
+                                    <div class="flex items-baseline justify-center gap-1">
+                                        <span class="text-5xl md:text-6xl font-bold text-white tracking-tighter counter" data-target="96">0</span>
+                                        <span class="text-2xl text-blue-400 font-medium">%</span>
+                                    </div>
+                                    <p class="text-xs text-blue-200/60 mt-2 mx-auto">Retidos após o 1º ano</p>
+                                </div>
+                                <div class="text-center w-full">
+                                    <p class="text-xs font-semibold text-blue-200/50 uppercase tracking-widest mb-2">Eficiência de Entrevistas</p>
+                                    <div class="flex items-baseline justify-center gap-1">
+                                        <span class="text-5xl md:text-6xl font-bold text-white tracking-tighter counter" data-target="3">0</span>
+                                        <span class="text-3xl text-neutral-600 font-medium px-1">:</span>
+                                        <span class="text-5xl md:text-6xl font-bold text-blue-500 tracking-tighter counter" data-target="1">0</span>
+                                    </div>
+                                    <p class="text-xs text-blue-200/60 mt-2 mx-auto">Apresentados vs Contratados</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Overlay Layer (Sem a Jobler - Red) -->
+                        <div id="metrics-slider-overlay" class="absolute inset-y-0 left-0 bg-[#0a0a0c] bg-gradient-to-br from-red-900/20 to-transparent border-r-[3px] border-white/50 overflow-hidden z-10 shadow-[5px_0_15px_rgba(0,0,0,0.5)]" style="width: 50%;">
+                            
+                            <!-- Inner Content (Must match container width via JS) -->
+                            <div id="metrics-slider-inner" class="absolute inset-y-0 left-0 flex flex-col justify-center bg-noise">
+                                <!-- Header -->
+                                <div class="absolute top-6 left-8 flex items-center gap-2">
+                                    <i data-lucide="x-circle" class="w-5 h-5 text-red-500"></i>
+                                    <span class="text-sm md:text-lg font-bold text-red-400 uppercase tracking-wider">Outras Consultorias</span>
+                                </div>
+                                
+                                <!-- Metrics -->
+                                <div class="flex flex-col md:flex-row justify-around w-full px-6 gap-8 md:gap-0 mt-8 md:mt-0 opacity-70 grayscale-[50%] blur-[0.5px]">
+                                    <div class="text-center w-full">
+                                        <p class="text-xs font-semibold text-red-200/50 uppercase tracking-widest mb-2">SLA de Apresentação</p>
+                                        <div class="flex items-baseline justify-center gap-1">
+                                            <span class="text-5xl md:text-6xl font-bold text-neutral-400 tracking-tighter">10</span>
+                                            <span class="text-xl text-red-400 font-medium">dias</span>
+                                        </div>
+                                        <p class="text-xs text-red-200/60 mt-2 mx-auto">Tempo médio de envio</p>
+                                    </div>
+                                    <div class="text-center w-full">
+                                        <p class="text-xs font-semibold text-red-200/50 uppercase tracking-widest mb-2">Taxa de Retenção</p>
+                                        <div class="flex items-baseline justify-center gap-1">
+                                            <span class="text-5xl md:text-6xl font-bold text-neutral-400 tracking-tighter">84</span>
+                                            <span class="text-xl text-red-400 font-medium">%</span>
+                                        </div>
+                                        <p class="text-xs text-red-200/60 mt-2 mx-auto">Retidos após o 1º ano</p>
+                                    </div>
+                                    <div class="text-center w-full">
+                                        <p class="text-xs font-semibold text-red-200/50 uppercase tracking-widest mb-2">Eficiência de Entrevistas</p>
+                                        <div class="flex items-baseline justify-center gap-1">
+                                            <span class="text-5xl md:text-6xl font-bold text-neutral-400 tracking-tighter">9</span>
+                                            <span class="text-3xl text-neutral-600 font-medium px-1">:</span>
+                                            <span class="text-5xl md:text-6xl font-bold text-red-500 tracking-tighter">1</span>
+                                        </div>
+                                        <p class="text-xs text-red-200/60 mt-2 mx-auto">Apresentados vs Contratados</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Handle -->
+                        <div id="metrics-slider-handle" class="absolute top-0 bottom-0 flex items-center justify-center cursor-ew-resize z-20 group" style="left: 50%; transform: translateX(-50%);">
+                            <!-- Drag Button -->
+                            <div class="absolute w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.5)] group-hover:scale-110 transition-transform">
+                                <i data-lucide="move-horizontal" class="w-6 h-6 text-black"></i>
+                            </div>
+                            <!-- Tooltip -->
+                            <div id="slider-tooltip" class="absolute -top-16 text-center whitespace-nowrap bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-white font-medium text-xs md:text-sm px-4 py-2 rounded-lg shadow-2xl border border-white/20 pointer-events-none transition-opacity duration-300">
+                                Arraste a linha
+                                <div class="text-[10px] text-neutral-600 dark:text-neutral-400 font-normal">Mova para ver o antes e depois</div>
+                                <!-- Caret -->
+                                <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-neutral-900"></div>
+                            </div>
+                            <!-- Cursor Icon -->
+                            <i data-lucide="mouse-pointer-click" id="slider-cursor-hint" class="absolute -bottom-10 -right-6 w-8 h-8 text-neutral-900 dark:text-white drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] animate-bounce pointer-events-none"></i>
+                        </div>
+                    </div>
+
+                    <!-- Diferenciais Horizontais -->
+                    <div class="pt-16">
+                        <div class="flex flex-wrap justify-between items-start gap-8 st-fade-up delay-300">
+                            
+                            <div class="flex items-start gap-4 max-w-xs">
+                                <i data-lucide="shield-check" class="w-6 h-6 text-neutral-900 dark:text-white shrink-0 mt-1"></i>
+                                <div>
+                                    <h5 class="text-neutral-900 dark:text-white font-medium mb-2">Garantia de Reposição</h5>
+                                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Proteção total do seu investimento com reposição sem custos em caso de turnover precoce.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4 max-w-xs">
+                                <i data-lucide="network" class="w-6 h-6 text-neutral-900 dark:text-white shrink-0 mt-1"></i>
+                                <div>
+                                    <h5 class="text-neutral-900 dark:text-white font-medium mb-2">Pool Proprietário</h5>
+                                    <p class="text-sm text-neutral-600 dark:text-neutral-400">+50k profissionais mapeados nos níveis de sênior, especialistas, gerentes, diretores e C-Level.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start gap-4 max-w-xs">
+                                <i data-lucide="fingerprint" class="w-6 h-6 text-neutral-900 dark:text-white shrink-0 mt-1"></i>
+                                <div>
+                                    <h5 class="text-neutral-900 dark:text-white font-medium mb-2">Parceria Customizada</h5>
+                                    <p class="text-sm text-neutral-600 dark:text-neutral-400">Atuamos como uma extensão genuína da sua área de Talent Acquisition no mercado.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 5ª SEÇÃO: MERCADOS DE ESPECIALIDADE (Bento Box Layout) -->
+            <section id="mercados" class="py-32 px-6 bg-[#050505] relative overflow-hidden">
+                <div class="mx-auto max-w-7xl relative">
+                    <div class="rounded-3xl border border-white/[0.08] p-6 sm:p-8 relative backdrop-blur-xl card-grid-bg shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                        
+                        <!-- Header -->
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-center st-fade-up">
+                            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white tracking-tighter">Setores.</h2>
+                            <span aria-hidden="true" aria-orientation="vertical" class="hidden sm:block w-px bg-white/20 h-10" role="separator"></span>
+                            <p class="text-base text-neutral-600 dark:text-neutral-400 tracking-tight">Somos especializados em segmentos que se destacam no mercado global</p>
+                        </div>
+                        <div class="h-px bg-neutral-200 dark:bg-white/10 mt-6"></div>
+
+                        <!-- Grid UI (Masonry-style) -->
+                        <div class="w-full max-w-4xl mx-auto mt-16 relative">
+                            <!-- We use CSS Grid. 3 cols, 4 rows. -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[160px]">
+                                
+                                <!-- Card: Startups (Col 1, Row 1) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-1 md:row-start-1 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="rocket" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Startups</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Startups</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Scale-Ups, Tech-Enabled Businesses, Innovation Hubs, Venture Builders & Venture Capital, Accelerators & Incubators.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card: Healthcare (Col 2, Row 1) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-2 md:row-start-1 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="activity" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Healthcare & Life Sciences</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Healthcare & Life Sciences</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Pharmaceuticals (Farma), Biotechnology, Medical Devices, Diagnostics labs (IVD), Hospitals & Healthcare Providers, Health Insurance & Payers, Animal Health & Nutrition, Digital Health & HealthTech.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card: Banking (Col 3, Row 1) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-3 md:row-start-1 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="landmark" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Banking & Financial Services</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Banking & Financial Services</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Banking, Investment Banking, Wealth Management, Insurance, Payments & Cards, Capital Markets, Lending & Credit Platforms, Digital Assets & Crypto, Fintechs.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card: Technology (Col 1, Row 2) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-1 md:row-start-2 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="code-2" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Technology</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Technology</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Software & SaaS, Enterprise Technology, Cloud Computing, Artificial Intelligence & Machine Learning, Cybersecurity, Data & Analytics, IT Services & Consulting.</p>
+                                    </div>
+                                </div>
+
+                                <!-- CENTER: JOBLER LOGO (Col 2, Row 2-3) -->
+                                <div class="relative bg-transparent border-transparent shadow-none dark:bg-white dark:border-white/20 rounded-2xl flex flex-col items-center justify-center p-8 dark:shadow-[0_0_50px_rgba(255,255,255,0.1)] md:col-start-2 md:row-start-2 md:row-span-2 group overflow-hidden">
+                                    <div class="absolute inset-0 hidden dark:block bg-gradient-to-br from-neutral-100 to-white opacity-90"></div>
+                                    <div class="relative z-10 drop-shadow-2xl group-hover:scale-110 transition-transform duration-700">
+                                        
+                                        <img src="assets/images/logo/LOGO3Dsemfundo.webp" alt="Jobler Logo" class="w-48 h-48 sm:w-56 sm:h-56 object-contain animate-spin-y">
+                                    </div>
+                                </div>
+
+                                <!-- Card: Consumer (Col 3, Row 2) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-3 md:row-start-2 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="shopping-bag" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Consumer Markets</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Consumer Markets</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Food & Beverage, Beauty & Personal Care, Retail & E-commerce, Fashion & Luxury, Consumer Services.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card: Industrial (Col 1, Row 3) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-1 md:row-start-3 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="factory" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Industries</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Industries</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Industrial Manufacturing, Automotive, Aerospace & Defense, Chemicals & Petrochemicals, Machinery & Equipment, Electronics & Semiconductors, Packaging, Metals & Steel, Industrial Automation, Process Industries, Logistics & Supply Chain.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card: Commodities (Col 3, Row 3) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-3 md:row-start-3 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="sprout" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Commodities & Comex</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Commodities & Comex</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Agro, Energy, Oil & Gas, Mining & Metals, Pulp & Paper, Trading, Shipping, Ports & Infrastructure.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card: Wellness (Col 1, Row 4) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-1 md:row-start-4 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="heart" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Wellness & Fitness</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Wellness & Fitness</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Health & Wellbeing, Gyms & Fitness Clubs, Sports Equipments, Nutrition & Supplements, Beauty & Aesthetics, Longevity & Preventive Health, Recovery & Rehabilitation, Lifestyle & Holistic Wellness.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card: Media & Gaming (Col 2, Row 4) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-2 md:row-start-4 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="gamepad-2" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Media, Gaming & Creator Economy</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Media, Gaming & Creator Economy & Gaming</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">E-sports, Streaming Platforms, Creator Economy, Social Media Platforms, Advertising & AdTech, Radio & TV, Music & Audio, Web3 Entertainment.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Card: Construction (Col 3, Row 4) -->
+                                <div class="group relative bg-blue-50 dark:bg-[#0a0a0c] border border-blue-100 dark:border-white/5 rounded-2xl flex flex-col items-center justify-center p-6 hover:bg-blue-900/20 transition-all duration-300 overflow-hidden cursor-pointer md:col-start-3 md:row-start-4 hover:border-blue-400 hover:shadow-[0_0_80px_rgba(59,130,246,0.8)]">
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 group-hover:-translate-y-8 group-hover:opacity-0">
+                                        <i data-lucide="hard-hat" class="w-8 h-8 text-neutral-500 mb-3"></i>
+                                        <span class="text-sm font-medium text-neutral-700 dark:text-neutral-300">Construction & Energy</span>
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                                        <span class="text-sm font-bold text-neutral-900 dark:text-white mb-2">Construction & Energy</span>
+                                        <p class="text-xs text-neutral-600 dark:text-neutral-400 leading-tight">Construction & Infrastructure, Engineering & EPC, Real Estate, Building Materials, Energy & Utilities, Transmission & Distribution.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6ª SEÇÃO: OS SÓCIOS -->
+            <section id="socios" class="py-32 px-6 bg-[#050505] relative overflow-hidden">
+                
+
+                <div class="mx-auto max-w-7xl relative">
+                    <div class="rounded-3xl border border-white/[0.08] p-6 sm:p-8 relative backdrop-blur-xl card-grid-bg shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                        
+                        <!-- Header -->
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-center st-fade-up">
+                            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white tracking-tighter">Os sócios.</h2>
+                            <span aria-hidden="true" aria-orientation="vertical" class="hidden sm:block w-px bg-white/20 h-10" role="separator"></span>
+                            <p class="text-base text-neutral-600 dark:text-neutral-400 tracking-tight">A confiança é selada pelo time que lidera cada projeto</p>
+                        </div>
+                        <div class="h-px bg-neutral-200 dark:bg-white/10 mt-6"></div>
+
+                                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 md:gap-4 mt-8">
+                        <!-- 1. Matheus Segantine -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Matheus Segantine.webp" alt="Matheus Segantine" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/sega/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Matheus Segantine</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Co-Founder</p>
+                            </div>
+                        </div>
+
+                        <!-- 2. Eduardo Rached -->
+                        
+                        <!-- 2. Eduardo Rached -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Eduardo Rached.webp" alt="Eduardo Rached" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/rached-eduardo/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Eduardo Rached</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Co-Founder</p>
+                            </div>
+                        </div>
+
+                        <!-- 3. Guilherme Valle -->
+                        
+                        <!-- 3. Guilherme Valle -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Guilherme Valle.webp" alt="Guilherme Valle" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/gui-valle/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Guilherme Valle</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Co-Founder</p>
+                            </div>
+                        </div>
+
+                        <!-- 4. Bruno Marafon -->
+                        
+                        <!-- 4. Bruno Marafon -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Bruno Marafon.webp" alt="Bruno Marafon" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/bruno-marafon/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Bruno Marafon</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Industrial & Manufacturing</p>
+                            </div>
+                        </div>
+
+                        <!-- 5. Aline Marafon -->
+                        
+                        <!-- 5. Aline Nogueira -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Aline Marafon.webp" alt="Aline Nogueira" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/aline-nogueira-a78161103/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Aline Nogueira</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Technology & SaaS</p>
+                            </div>
+                        </div>
+
+                        <!-- 6. Enzo Davila -->
+                        
+                        <!-- 6. Enzo Davila -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Enzo Davila.webp" alt="Enzo Davila" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/enzo-davila-983808181/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Enzo Davila</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Wellness & Fitness</p>
+                            </div>
+                        </div>
+
+                        <!-- 7. Juliany Elisa -->
+                        
+                        <!-- 7. Juliany Elisa -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Juliany Elisa.webp" alt="Juliany Elisa" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/julianyelisa/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Juliany Elisa</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Banking & Financial Services</p>
+                            </div>
+                        </div>
+
+                        <!-- 8. Leandro Feitosa -->
+                        
+                        <!-- 8. Carlos Silveira -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Carlos Silveira.webp" alt="Carlos Silveira" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/carlos-silveira-b6975416/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Carlos Silveira</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Commodities, Trade & Logistics</p>
+                            </div>
+                        </div>
+
+                        <!-- 10. Isabella Romanelli -->
+                        
+                        <!-- 9. Isabella Romanelli -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Isabella Romanelli.webp" alt="Isabella Romanelli" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/isabella-romanelli-60019567/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Isabella Romanelli</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Healthcare & Life Sciences</p>
+                            </div>
+                        </div>
+
+                        <!-- 11. Letícia Silva -->
+                        
+                        <!-- 10. Letícia Silva -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Letícia Silva.webp" alt="Letícia Silva" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/leeticiasilva89/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Letícia Silva</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Construction & Energy</p>
+                            </div>
+                        </div>
+
+                        <!-- 12. Ednei Fibla -->
+                        
+                        <!-- 11. Leandro Feitosa -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Leandro Feitosa.webp" alt="Leandro Feitosa" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/leandro-marques-feitosa-a0a63723/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Leandro Feitosa</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Ops Manager</p>
+                            </div>
+                        </div>
+
+                        <!-- 9. Carlos Silveira -->
+                        
+                        <!-- 12. Daniele Blanco -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Daniele Blanco.webp" alt="Daniele Blanco" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/daniele-blanco/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Daniele Blanco</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Sales B2B</p>
+                            </div>
+                        </div>
+
+                        <!-- 15. Maria Eduarda de Queiroz -->
+                        
+                        <!-- 13. Ednei Fibla -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Ednei Fibla.webp" alt="Ednei Fibla" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/edneifibla/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Ednei Fibla</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Team Ops</p>
+                            </div>
+                        </div>
+
+                        <!-- 13. Laryssa Souza -->
+                        
+                        <!-- 14. Laryssa Souza -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Laryssa Souza.webp" alt="Laryssa Souza" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/lasoouza/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Laryssa Souza</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Team Ops</p>
+                            </div>
+                        </div>
+
+                        <!-- 14. Daniele Blanco -->
+                        
+                        <!-- 15. Ana Laura Barros -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Ana Laura Barros.webp" alt="Ana Laura Barros" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/ana-laura-parada-barros-224205198/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Ana Laura Barros</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Team Ops</p>
+                            </div>
+                        </div>
+                    
+                        <!-- 16. Maria Eduarda de Queiroz -->
+                        <div class="partner-card">
+                            <div class="partner-photo-wrap">
+                                <img src="assets/images/partners/Maria Eduarda de Queiroz.webp" alt="Maria Eduarda de Queiroz" class="partner-photo" loading="eager">
+                                <div class="partner-overlay flex items-end">
+                                    <a href="https://www.linkedin.com/in/dudamachadoqueiroz/" target="_blank" class="partner-badge flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-400 text-neutral-900 dark:text-white transition-all shadow-[0_0_20px_rgba(37,99,235,0.6)] cursor-pointer ml-auto mb-2 mr-2">
+                                        <svg class="w-5 h-5 text-neutral-900 dark:text-white" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2.5">
+                                <h4 class="text-xs font-semibold text-neutral-900 dark:text-white tracking-tight">Maria Eduarda de Queiroz</h4>
+                                <p class="text-[10px] text-neutral-500 mt-0.5">Team Ops</p>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            <!-- 7ª SEÇÃO: OS MODELOS -->
+            <section id="modelos" class="py-32 px-6 bg-[#050505] relative overflow-hidden">
+                
+
+                <div class="mx-auto max-w-7xl relative">
+                    <div class="rounded-3xl border border-white/[0.08] p-6 sm:p-8 relative backdrop-blur-xl card-grid-bg shadow-[0_8px_32px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.06)]">
+                        
+                        <!-- Header -->
+                        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 sm:items-center st-fade-up">
+                            <h2 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-neutral-900 dark:text-white tracking-tighter">Os modelos.</h2>
+                            <span aria-hidden="true" aria-orientation="vertical" class="hidden sm:block w-px bg-white/20 h-10" role="separator"></span>
+                            <p class="text-base text-neutral-600 dark:text-neutral-400 tracking-tight max-w-lg">Três modelos de parceria que se adaptam à estratégia do seu negócio</p>
+                        </div>
+                        <div class="h-px bg-neutral-200 dark:bg-white/10 mt-6"></div>
+
+                        <!-- Floating Cards -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-5 mt-10 items-start lg:items-end relative">
+
+                            <!-- Card 1: Success Fee -->
+                            <div class="model-card st-fade-up" style="transform: translateY(0);">
+                                <!-- Tag -->
+                                <div class="flex items-center justify-between mb-6">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wider">
+                                        <i data-lucide="zap" class="w-3 h-3 text-neutral-500"></i>
+                                        Performance
+                                    </span>
+                                </div>
+
+                                <h3 class="text-2xl font-bold text-neutral-900 dark:text-white tracking-tight mb-2">Success Fee</h3>
+                                <p class="text-xs text-neutral-500 uppercase tracking-wider font-semibold mb-4">Pós Pago</p>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">A Jobler assume o risco operacional. A remuneração ocorre integralmente apenas no fechamento da vaga.</p>
+
+                                <!-- Benefits -->
+                                <div class="space-y-3 mb-auto">
+                                    <div class="model-benefit">
+                                        <p class="text-xs font-semibold text-neutral-900 dark:text-white mb-0.5">Investimento Zero de Entrada</p>
+                                        <p class="text-[11px] text-neutral-600 dark:text-neutral-500 leading-relaxed">Investimento 100% atrelado ao sucesso da contratação.</p>
+                                    </div>
+                                    <div class="model-benefit">
+                                        <p class="text-xs font-semibold text-neutral-900 dark:text-white mb-0.5">Liberdade Operacional</p>
+                                        <p class="text-[11px] text-neutral-600 dark:text-neutral-500 leading-relaxed">Autonomia para trabalhar com outras consultorias e RH interno.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Quando utilizar -->
+                                <div class="model-when">
+                                    <p class="text-[10px] text-neutral-600 uppercase tracking-widest font-semibold mb-3">Quando utilizar</p>
+                                    <div class="space-y-2">
+                                        <p class="model-when-item text-[11px] text-neutral-500 leading-relaxed">Posições de média gestão ou especialistas técnicos</p>
+                                        <p class="model-when-item text-[11px] text-neutral-500 leading-relaxed">Processos não sigilosos</p>
+                                        <p class="model-when-item text-[11px] text-neutral-500 leading-relaxed">Validação de parceria e fit de entrega</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 2: Retained Fee (Featured) -->
+                            <div class="model-card model-card--featured st-fade-up delay-100">
+                                <!-- Tag -->
+                                <div class="flex items-center justify-between mb-6">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-[10px] font-semibold text-blue-400 uppercase tracking-wider">
+                                        <i data-lucide="crown" class="w-3 h-3 text-blue-400"></i>
+                                        Executive Search
+                                    </span>
+                                    <span class="text-[9px] font-bold text-blue-400 uppercase tracking-widest bg-blue-500/10 px-2 py-0.5 rounded border border-blue-500/20">Recomendado</span>
+                                </div>
+
+                                <h3 class="text-2xl font-bold text-neutral-900 dark:text-white tracking-tight mb-2">Retained Fee</h3>
+                                <p class="text-xs text-neutral-500 uppercase tracking-wider font-semibold mb-4">Pré Pago</p>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">O modelo de elite. A Jobler atua como extensão do seu RH. Investimento dividido em Retainer inicial + saldo no fechamento.</p>
+
+                                <!-- Benefits -->
+                                <div class="space-y-3 mb-auto">
+                                    <div class="model-benefit">
+                                        <p class="text-xs font-semibold text-neutral-900 dark:text-white mb-0.5">Prioridade Total</p>
+                                        <p class="text-[11px] text-neutral-600 dark:text-neutral-500 leading-relaxed">Consultores seniores com dedicação exclusiva para sua demanda.</p>
+                                    </div>
+                                    <div class="model-benefit">
+                                        <p class="text-xs font-semibold text-neutral-900 dark:text-white mb-0.5">Sinergia de Fluxo de Caixa</p>
+                                        <p class="text-[11px] text-neutral-600 dark:text-neutral-500 leading-relaxed">Benefício mútuo no fluxo de caixa de ambas as empresas, mostrando que a condição foi pensada para o equilíbrio financeiro dos dois lados.</p>
+                                    </div>
+                                    <div class="model-benefit">
+                                        <p class="text-xs font-semibold text-neutral-900 dark:text-white mb-0.5">Investimento Otimizado</p>
+                                        <p class="text-[11px] text-neutral-600 dark:text-neutral-500 leading-relaxed">Formato de pagamento desenhado para ser mais econômico.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Quando utilizar -->
+                                <div class="model-when">
+                                    <p class="text-[10px] text-neutral-600 uppercase tracking-widest font-semibold mb-3">Quando utilizar</p>
+                                    <div class="space-y-2">
+                                        <p class="model-when-item text-[11px] text-neutral-500 leading-relaxed">Cadeiras estratégicas (C-Level e Diretores) e posições de alta confidencialidade</p>
+                                        <p class="model-when-item text-[11px] text-neutral-500 leading-relaxed">Buscas complexas que exigem um embaixador da sua marca para atrair grandes executivos</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 3: Flat Fee -->
+                            <div class="model-card st-fade-up delay-200" style="transform: translateY(0);">
+                                <!-- Tag -->
+                                <div class="flex items-center justify-between mb-6">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/5 border border-white/10 text-[10px] font-semibold text-neutral-600 dark:text-neutral-400 uppercase tracking-wider">
+                                        <i data-lucide="calculator" class="w-3 h-3 text-neutral-500"></i>
+                                        Previsibilidade
+                                    </span>
+                                </div>
+
+                                <h3 class="text-2xl font-bold text-neutral-900 dark:text-white tracking-tight mb-2">Flat Fee</h3>
+                                <p class="text-xs text-neutral-500 uppercase tracking-wider font-semibold mb-4">Taxa Fixa</p>
+                                <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed mb-6">Valor fixado previamente em montante único, independente da oscilação salarial do candidato escolhido.</p>
+
+                                <!-- Benefits -->
+                                <div class="space-y-3 mb-auto">
+                                    <div class="model-benefit">
+                                        <p class="text-xs font-semibold text-neutral-900 dark:text-white mb-0.5">Imparcialidade</p>
+                                        <p class="text-[11px] text-neutral-600 dark:text-neutral-500 leading-relaxed">Elimina conflito de interesse.</p>
+                                    </div>
+                                    <div class="model-benefit">
+                                        <p class="text-xs font-semibold text-neutral-900 dark:text-white mb-0.5">Previsibilidade Financeira</p>
+                                        <p class="text-[11px] text-neutral-600 dark:text-neutral-500 leading-relaxed">Controle de budget e fluxo de caixa sem surpresas.</p>
+                                    </div>
+                                    <div class="model-benefit">
+                                        <p class="text-xs font-semibold text-neutral-900 dark:text-white mb-0.5">Foco em Volume</p>
+                                        <p class="text-[11px] text-neutral-600 dark:text-neutral-500 leading-relaxed">Economia de escala em projetos de expansão de times.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Quando utilizar -->
+                                <div class="model-when">
+                                    <p class="text-[10px] text-neutral-600 uppercase tracking-widest font-semibold mb-3">Quando utilizar</p>
+                                    <div class="space-y-2">
+                                        <p class="model-when-item text-[11px] text-neutral-500 leading-relaxed">Projetos de expansão de áreas ou múltiplos perfis similares</p>
+                                        <p class="model-when-item text-[11px] text-neutral-500 leading-relaxed">Processos de governança e procurement que exigem custos fixos pré-aprovados</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9ª SEÇÃO: FOOTER -->
+            <footer class="bg-[#050505] pt-20 pb-10 px-6">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-16 text-center md:text-left">
+                        
+                        <!-- Esquerda: Logo e Descrição -->
+                        <div class="flex-1">
+                            <a href="#" class="flex items-center justify-center md:justify-start gap-2 mb-4">
+                                <img src="assets/images/logo/LOGO3Dsemfundo.webp" alt="Jobler Logo" class="h-8 w-auto opacity-80 hover:opacity-100 transition-opacity">
+                                <span class="text-xl font-bold tracking-tight text-neutral-900 dark:text-white">Jobler</span>
+                            </a>
+                            <p class="text-sm text-neutral-500 leading-relaxed max-w-xs mx-auto md:mx-0">
+                                Recrutamento e Seleção para empresas que constroem o futuro.
+                            </p>
+                        </div>
+
+                        <!-- Centro: Redes Sociais -->
+                        <div class="flex-1 flex justify-center items-center gap-6">
+                            <a href="https://www.linkedin.com/company/jobler/" target="_blank" rel="noopener noreferrer" class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                            </a>
+                            <a href="https://www.instagram.com/joblerbr/" target="_blank" rel="noopener noreferrer" class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors" aria-label="Instagram">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                            </a>
+                        </div>
+
+                        <!-- Direita: Espaçador -->
+                        <div class="flex-1 hidden md:block">
+                            <!-- Espaçador invisível para garantir a centralização perfeita das redes sociais no flexbox -->
+                        </div>
+
+                    </div>
+
+                    <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-neutral-600">
+                        <p>© 2026 Jobler. Todos os direitos reservados. | 53.557.821/0001-90 - JOBLER CPS LTDA</p>
+                        <div class="flex gap-4 items-center">
+                            <a href="#" class="hover:text-neutral-900 dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-colors">Termos de Uso</a>
+                            <a href="#" class="hover:text-neutral-900 dark:hover:text-white text-neutral-500 dark:text-neutral-400 transition-colors">Política de Privacidade</a>
+                            <div class="w-px h-4 bg-neutral-300 dark:bg-white/10 mx-2"></div>
+                            <button onclick="toggleTheme()" class="text-neutral-500 hover:text-blue-600 dark:text-neutral-400 dark:hover:text-white transition-colors p-1.5 rounded-md hover:bg-neutral-200 dark:hover:bg-white/10 flex items-center justify-center">
+                                <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                                <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div> <!-- End of Dark Solid Background wrapper -->
+    </div> <!-- End of relative z-10 wrapper -->
+
+    
+
+<!-- Sobre Modal -->
+<div id="sobre-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-500">
+    <div class="absolute inset-0 bg-white/80 dark:bg-[#050505]/80 backdrop-blur-sm cursor-pointer" onclick="forceFinishTyping()"></div>
+    
+    <div class="relative w-full max-w-4xl bg-white dark:bg-[#0a0a0c] border border-neutral-200 dark:border-white/10 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.05)] dark:shadow-[0_0_80px_rgba(37,99,235,0.15)] overflow-hidden flex flex-col max-h-[90vh]">
+        <!-- Header -->
+        <div class="flex items-center justify-between px-6 py-4 border-b border-neutral-200 dark:border-white/5 bg-neutral-50 dark:bg-white/[0.02]">
+            <div></div>
+            <div class="flex items-center gap-4">
+                <span class="text-xs text-neutral-500 hidden sm:block">Clique no texto para avançar</span>
+                <button onclick="closeSobreModal()" class="text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:text-white transition-colors bg-neutral-100 dark:bg-white/5 hover:bg-neutral-200 dark:bg-white/10 rounded-lg p-1.5">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Body -->
+        <div class="p-6 sm:p-8 md:p-10 overflow-y-auto custom-scrollbar font-sans text-sm sm:text-base leading-relaxed cursor-pointer" id="sobre-content" onclick="forceFinishTyping()">
+            <!-- Text typed here -->
+        </div>
+    </div>
+</div>
+
+<template id="sobre-text-template">
+<h2 class="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-white mb-6 tracking-tight">Mudar o ritmo do recrutamento estratégico. Essa é a nossa história.</h2>
+
+<p class="text-neutral-700 dark:text-neutral-300 mb-4 leading-relaxed">A Jobler nasceu em 2020 a partir de uma insatisfação clara. Nossos fundadores deixaram as grandes consultorias tradicionais de headhunting com um objetivo único: criar uma operação de recrutamento desenhada especificamente para a nova economia. Identificamos que o mercado tradicional não conseguia acompanhar a velocidade de empresas que precisam performar em ambientes dinâmicos, incertos e de forte crescimento.</p>
+
+<p class="text-neutral-700 dark:text-neutral-300 mb-4 leading-relaxed">Em 2023, quando o ecossistema de tecnologia enfrentou correções globais e ondas de layoffs, nós nos reinventamos. Em vez de recuar, transformamos a crise em oportunidade. Pegamos toda a agilidade, a cultura hands-on e a eficiência implacável que aprendemos com as startups e passamos a oferecer esse modelo para as grandes corporações consolidadas.</p>
+
+<p class="text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed">Hoje, a Jobler une o melhor dos dois mundos: a robustez analítica exigida pelas grandes marcas e a velocidade de execução do universo de inovação.</p>
+
+<div class="h-px bg-neutral-200 dark:bg-white/10 w-full mb-8"></div>
+
+<h3 class="text-xl sm:text-2xl font-bold text-blue-400 mb-6">Diretrizes: Missão, Visão e Valores</h3>
+
+<h4 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Missão</h4>
+<p class="text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">Queremos ser parte ativa da transformação econômica do Brasil, conectando pessoas e empresas de forma mais rápida e eficiente. Nosso propósito é simples: fazer do recrutamento uma vantagem competitiva para o seu negócio e nos tornarmos a grande referência do mercado.<br/><span class="block mt-3 text-blue-300 italic border-l-2 border-blue-500 pl-4">“Contratar quem faz a diferença, é o nosso job.”</span></p>
+
+<h4 class="text-lg font-semibold text-neutral-900 dark:text-white mb-2">Visão</h4>
+<p class="text-neutral-700 dark:text-neutral-300 mb-6 leading-relaxed">Ser a principal referência no Brasil em recrutamento e seleção de alta qualidade com agilidade. Operamos como uma estrutura personalizada (boutique), com atuação multimercado, focados em nos tornar top of mind no setor nos próximos 10 anos.</p>
+
+<h4 class="text-lg font-semibold text-neutral-900 dark:text-white mb-4">Valores</h4>
+<ul class="space-y-4 mb-8">
+  <li class="text-neutral-700 dark:text-neutral-300 leading-relaxed flex items-start gap-3"><i data-lucide="chevron-right" class="w-5 h-5 text-blue-500 shrink-0 mt-0.5"></i> <span><strong class="text-neutral-900 dark:text-white">Ambição:</strong> Almejamos consistentemente mais do que a média. É a "querência" diária pelo excelente que nos diferencia.</span></li>
+  <li class="text-neutral-700 dark:text-neutral-300 leading-relaxed flex items-start gap-3"><i data-lucide="chevron-right" class="w-5 h-5 text-blue-500 shrink-0 mt-0.5"></i> <span><strong class="text-neutral-900 dark:text-white">Realização:</strong> Valorizamos a execução prática e o resultado tangível. Quem planta com consistência, colhe o sucesso.</span></li>
+</ul>
+
+<div class="h-px bg-neutral-200 dark:bg-white/10 w-full mb-8"></div>
+
+<h3 class="text-xl sm:text-2xl font-bold text-blue-400 mb-6">Nossa Cultura: Ser Headhunter na Jobler</h3>
+<p class="text-neutral-700 dark:text-neutral-300 mb-4 leading-relaxed">Não buscamos funcionários, formamos futuros sócios. O DNA da Jobler é moldado pelo mindset do extra mile — onde profissionais de alta performance entendem que os vencedores sempre querem ganhar de novo.</p>
+
+<p class="text-neutral-700 dark:text-neutral-300 mb-4 leading-relaxed">Nossa operação ignora o corporativismo engessado. Frases como “isso não é do meu escopo” ou “está fora do meu horário” não pertencem ao nosso vocabulário. Não temos apego a cargos ou carreirismo burocrático. Entendemos a remuneração fixa como uma ajuda de custo, pois a verdadeira prosperidade é alcançada através do resultado variável e do crescimento comercial que puxa a empresa para a frente.</p>
+
+<p class="text-neutral-700 dark:text-neutral-300 mb-8 leading-relaxed">Somos verdadeiramente meritocráticos: o acordo é cumprido à risca. Não toleramos reclamações vazias ou desculpas. Quem entrega o resultado cresce e ganha espaço.</p>
+
+<div class="h-px bg-neutral-200 dark:bg-white/10 w-full mb-8"></div>
+
+<h3 class="text-xl sm:text-2xl font-bold text-blue-400 mb-6">Diferenciais Competitivos</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="bg-neutral-100 dark:bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-neutral-200 dark:bg-white/10 transition-colors">
+      <div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mb-5">
+          <i data-lucide="zap" class="w-6 h-6 text-blue-400"></i>
+      </div>
+      <h4 class="text-base font-semibold text-neutral-900 dark:text-white mb-3">Agilidade (Anti-Shortlist)</h4>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">Abolimos listas demoradas. Trabalhamos por sprints e apresentamos o primeiro candidato qualificado em até 4 dias úteis.</p>
+  </div>
+  <div class="bg-neutral-100 dark:bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-neutral-200 dark:bg-white/10 transition-colors">
+      <div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mb-5">
+          <i data-lucide="target" class="w-6 h-6 text-blue-400"></i>
+      </div>
+      <h4 class="text-base font-semibold text-neutral-900 dark:text-white mb-3">Qualidade (Sniper)</h4>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">Atuamos com precisão absoluta. Média de um placement para cada quatro candidatos enviados. Contratação certa.</p>
+  </div>
+  <div class="bg-neutral-100 dark:bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-neutral-200 dark:bg-white/10 transition-colors">
+      <div class="w-12 h-12 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center mb-5">
+          <i data-lucide="check" class="w-6 h-6 text-blue-400"></i>
+      </div>
+      <h4 class="text-base font-semibold text-neutral-900 dark:text-white mb-3">Descomplicados</h4>
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">Diretos e focados na resolução. Simplificamos desde a precificação até o seletivo final. Menos é mais.</p>
+  </div>
+</div>
+</template>
+
+
+
+
+
+
+    
+
+    <script src="js/main.js"></script>
+</body>
+</html>

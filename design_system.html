@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>Design System - Jobler</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                    colors: {
+                        neutral: {
+                            950: '#050505',
+                            900: '#0a0a0c',
+                            800: '#1a1a1a',
+                        },
+                        blue: {
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gray-50 dark:bg-neutral-950 text-neutral-900 dark:text-white antialiased font-sans">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 dark:bg-[#050505]/80 backdrop-blur-md border-b border-neutral-200 dark:border-white/10 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold">DS</div>
+                <span class="text-xl font-bold tracking-tight">Jobler Design System</span>
+            </div>
+            <div class="flex gap-4">
+                <a href="index.html" class="text-sm font-medium hover:text-blue-500 transition-colors">Voltar ao Site</a>
+                <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 bg-neutral-200 dark:bg-neutral-800 rounded-full hover:bg-neutral-300 dark:hover:bg-neutral-700 transition">
+                    <i data-lucide="moon" class="w-4 h-4 dark:hidden"></i>
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-24 px-6 max-w-7xl mx-auto space-y-24">
+        
+        <!-- Header -->
+        <header class="text-center max-w-3xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6 tracking-tighter">Design System</h1>
+            <p class="text-lg text-neutral-600 dark:text-neutral-400">Guia de estilo e componentes padronizados para a plataforma Jobler. Combinação de estética Premium, Glassmorphism e Dark Mode dinâmico.</p>
+        </header>
+
+        <!-- Cores -->
+        <section class="space-y-8">
+            <div class="border-b border-neutral-200 dark:border-white/10 pb-4">
+                <h2 class="text-3xl font-semibold">1. Cores (Color Palette)</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Neutral 950 -->
+                <div class="rounded-2xl border border-neutral-200 dark:border-white/10 overflow-hidden bg-white dark:bg-neutral-900">
+                    <div class="h-32 w-full bg-[#050505]"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold">Neutral 950</h4>
+                        <p class="text-sm text-neutral-500">#050505 (Background principal)</p>
+                    </div>
+                </div>
+                <!-- Neutral 900 -->
+                <div class="rounded-2xl border border-neutral-200 dark:border-white/10 overflow-hidden bg-white dark:bg-neutral-900">
+                    <div class="h-32 w-full bg-[#0a0a0c]"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold">Neutral 900</h4>
+                        <p class="text-sm text-neutral-500">#0a0a0c (Seções Secundárias)</p>
+                    </div>
+                </div>
+                <!-- Blue 500 -->
+                <div class="rounded-2xl border border-neutral-200 dark:border-white/10 overflow-hidden bg-white dark:bg-neutral-900">
+                    <div class="h-32 w-full bg-blue-500"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold">Blue 500</h4>
+                        <p class="text-sm text-neutral-500">#3b82f6 (Acentos Primários)</p>
+                    </div>
+                </div>
+                <!-- Blue 600 -->
+                <div class="rounded-2xl border border-neutral-200 dark:border-white/10 overflow-hidden bg-white dark:bg-neutral-900">
+                    <div class="h-32 w-full bg-blue-600"></div>
+                    <div class="p-4">
+                        <h4 class="font-bold">Blue 600</h4>
+                        <p class="text-sm text-neutral-500">#2563eb (Botões Hover)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tipografia -->
+        <section class="space-y-8">
+            <div class="border-b border-neutral-200 dark:border-white/10 pb-4">
+                <h2 class="text-3xl font-semibold">2. Tipografia (Inter)</h2>
+            </div>
+            
+            <div class="space-y-6 bg-white dark:bg-[#0a0a0c] p-8 rounded-3xl border border-neutral-200 dark:border-white/10">
+                <div class="flex flex-col md:flex-row md:items-baseline gap-4">
+                    <div class="w-24 text-neutral-500 text-sm">H1</div>
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tighter">O futuro do talento</h1>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-baseline gap-4">
+                    <div class="w-24 text-neutral-500 text-sm">H2</div>
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tight">Estratégia e Execução</h2>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-baseline gap-4">
+                    <div class="w-24 text-neutral-500 text-sm">H3</div>
+                    <h3 class="text-3xl font-semibold tracking-tight">Metodologia Exclusiva</h3>
+                </div>
+                <div class="flex flex-col md:flex-row md:items-baseline gap-4 mt-8">
+                    <div class="w-24 text-neutral-500 text-sm">Body</div>
+                    <p class="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl">Este é um exemplo de texto corrido. A família tipográfica "Inter" foi escolhida por sua excelente legibilidade em interfaces digitais, combinando perfeitamente com a estética tech da Jobler.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Botões -->
+        <section class="space-y-8">
+            <div class="border-b border-neutral-200 dark:border-white/10 pb-4">
+                <h2 class="text-3xl font-semibold">3. Botões e Ações</h2>
+            </div>
+            
+            <div class="flex flex-wrap gap-8 items-center bg-white dark:bg-[#0a0a0c] p-8 rounded-3xl border border-neutral-200 dark:border-white/10">
+                
+                <div>
+                    <p class="text-sm text-neutral-500 mb-4">Primary Button (Beam Spin)</p>
+                    <button class="relative inline-flex items-center justify-center px-8 py-4 font-semibold text-white bg-blue-600 rounded-full overflow-hidden group">
+                        <span class="absolute inset-0 w-full h-full bg-gradient-to-br from-blue-400 via-blue-600 to-blue-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        <span class="relative z-10 flex items-center gap-2">
+                            Entrar em Contato
+                            <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </button>
+                </div>
+
+                <div>
+                    <p class="text-sm text-neutral-500 mb-4">Secondary (Glass)</p>
+                    <button class="px-8 py-4 rounded-full bg-white/5 border border-white/10 text-neutral-900 dark:text-white font-medium hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-sm">
+                        Saiba Mais
+                    </button>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- Cards & Glassmorphism -->
+        <section class="space-y-8">
+            <div class="border-b border-neutral-200 dark:border-white/10 pb-4">
+                <h2 class="text-3xl font-semibold">4. Cards (Glassmorphism & Glow)</h2>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Standard Feature Card -->
+                <div class="card p-8 group/card border border-neutral-200 dark:border-white/10 bg-white dark:bg-[#0a0a0c] rounded-3xl relative overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] cursor-pointer">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 group-hover/card:scale-110 transition-transform duration-500">
+                        <i data-lucide="zap" class="w-6 h-6 text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Feature Card Padrão</h3>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-sm">Usado em listagens de funcionalidades. Possui um efeito de elevação sutil e um brilho azulado de fundo ao passar o mouse.</p>
+                </div>
+
+                <!-- Hover Card Especial (Dark Mode Only demo) -->
+                <div class="partner-card relative rounded-3xl overflow-hidden border border-white/10 bg-[#050505] p-6 h-full min-h-[250px] group">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10"></div>
+                    <img src="assets/images/characters/2.webp" class="absolute inset-0 w-full h-full object-cover grayscale opacity-50 group-hover:opacity-100 transition-opacity duration-700" alt="Demo">
+                    
+                    <div class="relative z-20 h-full flex flex-col justify-end">
+                        <h3 class="text-white font-bold text-xl mb-1">Image Card</h3>
+                        <p class="text-neutral-400 text-sm">Escala de cinza inicial, revela cor ao hover.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Animações -->
+        <section class="space-y-8">
+            <div class="border-b border-neutral-200 dark:border-white/10 pb-4">
+                <h2 class="text-3xl font-semibold">5. Animações Globais</h2>
+            </div>
+            <div class="bg-white dark:bg-[#0a0a0c] p-8 rounded-3xl border border-neutral-200 dark:border-white/10 text-neutral-600 dark:text-neutral-400">
+                <ul class="list-disc pl-5 space-y-4">
+                    <li><strong>Smooth Scrolling:</strong> Ativado globalmente na tag HTML.</li>
+                    <li><strong>st-fade-up:</strong> Classe utilitária (removida no CSS local, mas usa lógica GSAP no main.js) que faz os elementos surgirem de baixo para cima acompanhando o scroll.</li>
+                    <li><strong>Hover States:</strong> Todos os botões interativos e links mudam de cor suavemente (transition-colors duration-300).</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        lucide.createIcons();
+        if (localStorage.theme === 'light') {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</body>
+</html>
