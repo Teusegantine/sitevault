@@ -243,9 +243,6 @@
 
         });
 
-let typingTimeout;
-let isTyping = false;
-
 function openSobreModal() {
     const modal = document.getElementById("sobre-modal");
     const content = document.getElementById("sobre-content");
@@ -256,8 +253,9 @@ function openSobreModal() {
         modal.classList.remove("opacity-0");
     }, 10);
     
-    if(!isTyping) {
-        typeHTML(content, template.innerHTML, 6); // 6 chars per frame
+    content.innerHTML = template.innerHTML;
+    if (window.lucide) {
+        window.lucide.createIcons();
     }
 }
 
@@ -266,75 +264,8 @@ function closeSobreModal() {
     modal.classList.add("opacity-0");
     setTimeout(() => {
         modal.classList.add("hidden");
-        // Reset typing if needed
-        isTyping = false;
-        clearTimeout(typingTimeout);
         document.getElementById("sobre-content").innerHTML = "";
     }, 500);
-}
-
-function forceFinishTyping() {
-    if (isTyping) {
-        isTyping = false;
-    }
-}
-
-function typeHTML(element, htmlStr, charsPerFrame = 4) {
-  element.innerHTML = "";
-  let i = 0;
-  let text = "";
-  isTyping = true;
-  clearTimeout(typingTimeout);
-  
-  function typeWriter() {
-    if (!isTyping) {
-        element.innerHTML = htmlStr;
-        if(window.lucide) window.lucide.createIcons();
-        return;
-    }
-    
-    if (i < htmlStr.length) {
-      let charsAdded = 0;
-      
-      while (charsAdded < charsPerFrame && i < htmlStr.length) {
-          if (htmlStr.charAt(i) === "<") {
-            let tagEnd = htmlStr.indexOf(">", i);
-            if (tagEnd !== -1) {
-              text += htmlStr.substring(i, tagEnd + 1);
-              i = tagEnd + 1;
-            } else {
-              text += htmlStr.charAt(i);
-              i++;
-            }
-          } else if (htmlStr.charAt(i) === "&") {
-              let entEnd = htmlStr.indexOf(";", i);
-              if (entEnd !== -1 && entEnd - i < 10) {
-                  text += htmlStr.substring(i, entEnd + 1);
-                  i = entEnd + 1;
-                  charsAdded++;
-              } else {
-                  text += htmlStr.charAt(i);
-                  i++;
-                  charsAdded++;
-              }
-          } else {
-              text += htmlStr.charAt(i);
-              i++;
-              charsAdded++;
-          }
-      }
-      
-      element.innerHTML = text + "<span class=\"animate-pulse text-blue-500 font-bold ml-1\">_</span>";
-      element.scrollTop = element.scrollHeight; // Auto scroll
-      
-      typingTimeout = setTimeout(typeWriter, 25);
-    } else {
-      isTyping = false;
-      element.innerHTML = text;
-      if(window.lucide) window.lucide.createIcons();
-    }
-  }
-  typeWriter();
 }
 
 // Theme Toggle Logic
